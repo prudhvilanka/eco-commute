@@ -13,10 +13,10 @@ export default async function addRates(req, res) {
     await connectMongo();
     console.log('CONNECTED TO MONGO');
 
-    const sample_rates = await Rate.findOne({from: current, to: destination});
+    const sample_rates = await Rate.findOne({from: current,to: destination});
 
     console.log('FETCHED');
-
+    console.log(sample_rates)
     sample_rates?res.json(sample_rates["rates"]): res.status(500).send('No Result')
   } catch (error) {
     console.log(error);
