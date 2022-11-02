@@ -4,12 +4,14 @@ const rateSchema = new Schema({
   from: {
     type:String,
     required: true,
-    unique: true
     },
   to: {
     type:String,
     required:true,
-    unique: true
+  },
+  date:{
+    type:String,
+    required:true,
   },
   rates:
     {

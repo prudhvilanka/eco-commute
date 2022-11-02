@@ -5,15 +5,15 @@ import Rate from "../../models/ratesModel";
  * @param {import('next').NextApiRequest} req
  * @param {import('next').NextApiResponse} res
  */
-export default async function addRates(req, res) {
+export default async function search(req, res) {
   try {
-    const { current, destination } = req.body
+    const { current, destination, date } = req.body
 
     console.log('CONNECTING TO MONGO');
     await connectMongo();
     console.log('CONNECTED TO MONGO');
 
-    const sample_rates = await Rate.findOne({from: current,to: destination});
+    const sample_rates = await Rate.findOne({from: current,to: destination,date: date});
 
     console.log('FETCHED');
     console.log(sample_rates)

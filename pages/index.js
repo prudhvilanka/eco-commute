@@ -1,9 +1,14 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import React,{ useState } from 'react'
 import styles from '../styles/Home.module.css'
 import Card from './components/card'
 import { MagnifyingGlass } from  'react-loader-spinner'
+import  DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+
+
 const App = ()=> {
+  const [startDate,setStartDate] = useState(new Date());
   const [rate,setRate] = useState({})
   const [data,isData] = useState(false) 
   const [isloading,setIsloading] = useState(false)
@@ -16,6 +21,7 @@ const App = ()=> {
     const data = {
       current: event.target.current.value.toLowerCase(),
       destination: event.target.destination.value.toLowerCase(),
+      date: startDate.getDate()
     }
     console.log(data)
     const JSONdata = JSON.stringify(data)
@@ -55,13 +61,20 @@ const App = ()=> {
         <div className={styles.forms}>
           <form onSubmit={handleSubmit}>
 
-            <label htmlFor="current" >Current Location: </label>
+            <div>
+            <label htmlFor="current">Current Location: </label>
             <input className={styles.inputbox} type="text" id="current" name="current" required />
           
             <label htmlFor="destination">Destination: </label>
             <input className={styles.inputbox} type="text" id="destination" name="destination" required />
 
             <button className={styles.submit}type="submit">Search</button>
+            </div>
+            <div className={styles.datesetter}>
+            <label htmlFor="Date">Date: </label>
+            <DatePicker className={styles.inputbox} selected={startDate} onChange=
+              {(date) => setStartDate(date)} />
+            </div>
           </form>
         </div>
         { isloading && <MagnifyingGlass
