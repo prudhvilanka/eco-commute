@@ -2,12 +2,20 @@ import Head from 'next/head'
 import React,{ useState } from 'react'
 import styles from '../styles/Home.module.css'
 import Card from './components/card'
+import Select from 'react-select';
+import 'react-dropdown/style.css';
 import { MagnifyingGlass } from  'react-loader-spinner'
 import  DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
+  const options = [
+    { value: '1', label: 'One' },
+    { value: '2', label: 'Two' },
+    { value: '3', label: 'Three' },
+  ];
 
 const App = ()=> {
+  const [selectedOption, setSelectedOption] = useState(options[0]);
   const [startDate,setStartDate] = useState(new Date());
   const [rate,setRate] = useState({})
   const [data,isData] = useState(false) 
@@ -23,7 +31,7 @@ const App = ()=> {
       destination: event.target.destination.value.toLowerCase(),
       date: startDate.getDate()
     }
-    console.log(data)
+    const nop= selectedOption.value
     const JSONdata = JSON.stringify(data)
     const endpoint = '/api/search'
     const options = {
@@ -36,7 +44,9 @@ const App = ()=> {
     try{
       const response = await fetch(endpoint, options)
       const result = await response.json()
-      console.log(result)
+      Object.keys(result).forEach((key)=>{
+        result[key]=nop*result[key]
+      })
       setRate(result)
       isData(true)
     }catch(err){
@@ -68,12 +78,27 @@ const App = ()=> {
             <label htmlFor="destination">Destination: </label>
             <input className={styles.inputbox} type="text" id="destination" name="destination" required />
 
-            <button className={styles.submit}type="submit">Search</button>
             </div>
-            <div className={styles.datesetter}>
+            <div>
             <label htmlFor="Date">Date: </label>
             <DatePicker className={styles.inputbox} selected={startDate} onChange=
               {(date) => setStartDate(date)} />
+            <label htmlFor="current">No of Passengers: </label>
+            <Select
+            className={styles.inputbox}
+            defaultValue={selectedOption}
+            onChange={setSelectedOption}
+            options={options}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 10,
+              colors: {
+              ...theme.colors,
+              primary:'#0070f3'
+              },
+            })}
+            />
+            <button className={styles.submit}type="submit">Search</button>
             </div>
           </form>
         </div>

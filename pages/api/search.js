@@ -7,8 +7,8 @@ import Rate from "../../models/ratesModel";
  */
 
 
- 
 
+ 
 export default async function search(req, res) {
   try {
     let sorted_rates
@@ -21,7 +21,7 @@ export default async function search(req, res) {
     const sample_rates = await Rate.findOne({from: current,to: destination,date: date});
     sorted_rates = sample_rates?Object.fromEntries(Object.entries(sample_rates["rates"]).sort((a,b)=>a[1]-b[1])):{}
     console.log('FETCHED');
-    sorted_rates?res.json(sorted_rates): res.status(500).send('No Result')
+    sample_rates?res.json(sorted_rates): res.status(500).send('No Result')
   } catch (error) {
     console.log(error);
     res.status(500).send(error)
