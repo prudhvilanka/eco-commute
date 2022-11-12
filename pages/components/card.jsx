@@ -1,13 +1,25 @@
 import styles from '../../styles/Home.module.css'
 import Image from 'next/image'
+import Payscreen from './pay'
+import { useEffect, useState } from 'react'
 const Card = (props) =>{
+    console.log('hello card');
+    console.log(props);
+    const [show,setShow] = useState()
+    useEffect(()=>{
+        setShow()
+    },[props])
     return(
         <>
         {
             Object.keys(props.rates).map((val,ind)=>{
+                console.log(props.rates)
                 return (
                     <div key={ind} className={styles.grid}>
-                        <a href="/" className={styles.card}>
+                        <a onClick={(e)=>{
+                            e.preventDefault()
+                            setShow(ind)
+                        }} className={styles.card}>
                         {val === "car" && <Image 
                             src="/logo.jpg"       
                             alt="Picture of the author"
@@ -32,9 +44,15 @@ const Card = (props) =>{
                             <h2>Time to make new memories</h2>
                             <p>Don’t leave adventure in your dreams. Make it a reality with affordable <b>{val}</b> fare deals from Eco-Commute.</p>
                         </div>
-                        
                         <h2>${props.rates[val]}</h2>
+                        <button className={styles.submitcard} onClick = {((event)=>{
+                            event.preventDefault()
+                            setShow(ind)
+                        })} >Book</button>
                         </a>
+                        {
+                            show === ind && <Payscreen rate={props.rates[val]}/>
+                        }
                     </div>
                 )
             })

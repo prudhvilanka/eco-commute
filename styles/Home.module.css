@@ -99,9 +99,33 @@
   background-color: #0070f3;
   border-radius: 10px;
 }
+.submitcard{
+  border: none;
+  color: white;
+  height: 3rem;
+  margin-top:8rem;
+  padding: 14px 24px;
+  text-align: center;
+  float: right;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #0070f3;
+  border-radius: 10px;
+}
+.userd{
+  margin-left: 2rem;
+  padding-left: 1rem;
+  padding: 1rem;
+}
+
+.userd label{
+  font-size: medium;
+  padding: 0.5rem;
+  font-weight: bold;
+}
 
 .grid {
-  display: flex;
   padding: 0.2rem;
   justify-content: space-between;
   max-width: 800px;
@@ -122,6 +146,7 @@
   background-color: white;
   box-shadow: inset;
 }
+
 
 .card:hover,
 .card:focus,
