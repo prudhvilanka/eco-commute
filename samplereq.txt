@@ -1,0 +1,10 @@
+{
+    "to":"montreal",
+    "from":"toronto",
+    "rates":{
+        "car":"50",
+        "bus":"60",
+        "train":"90",
+        "flight":"160"
+    }
+}
