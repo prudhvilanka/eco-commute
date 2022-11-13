@@ -1,10 +1,41 @@
 {
-    "to":"montreal",
-    "from":"toronto",
-    "rates":{
-        "car":"50",
-        "bus":"60",
-        "train":"90",
-        "flight":"160"
+  "from": "toronto",
+  "to": "montreal",
+  "date": "7",
+  "rates": {
+    "car": "40",
+    "bus": "10",
+    "train": "30",
+    "flight": "100"
+  },
+  "details": {
+    "car": {
+      "id": "123",
+      "model": "kotha",
+      "provider": "prudhvi",
+      "class": "first",
+      "rate": "100"
+    },
+    "bus": {
+      "id": "234",
+      "model": "kotha",
+      "provider": "prudhvi",
+      "class": "first",
+      "rate": "100"
+    },
+    "train": {
+      "id": "567",
+      "model": "kotha",
+      "provider": "prudhvi",
+      "class": "first",
+      "rate": "100"
+    },
+    "flight": {
+      "id": "897",
+      "model": "kotha",
+      "provider": "prudhvi",
+      "class": "first",
+      "rate": "100"
     }
+  }
 }
