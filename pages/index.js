@@ -18,6 +18,7 @@ const App = ()=> {
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const [startDate,setStartDate] = useState(new Date());
   const [rate,setRate] = useState({})
+  const [details,setDetails] = useState({})
   const [data,isData] = useState(false) 
   const [isloading,setIsloading] = useState(false)
   const [err,seterr] = useState(false)
@@ -44,10 +45,13 @@ const App = ()=> {
     try{
       const response = await fetch(endpoint, options)
       const result = await response.json()
-      Object.keys(result).forEach((key)=>{
-        result[key]=nop*result[key]
+
+      Object.keys(result["rates"]).forEach((key)=>{
+        result.rates[key]=nop*result.rates[key]
       })
-      setRate(result)
+
+      setRate(result["rates"])
+      setDetails(result["details"])
       isData(true)
     }catch(err){
       seterr(true)
@@ -113,7 +117,7 @@ const App = ()=> {
                         color = '#0070f3'
                       />}
         {
-          data && <Card rates={rate}/>
+          data && <Card rates={rate} details={details}/>
         }
         {
           err && <h2>No Data Available!!!</h2>

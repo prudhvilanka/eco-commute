@@ -12,6 +12,7 @@ import Rate from "../../models/ratesModel";
 export default async function search(req, res) {
   try {
     let sorted_rates
+    let result
     const { current, destination, date } = req.body
 
     console.log('CONNECTING TO MONGO');
@@ -19,10 +20,14 @@ export default async function search(req, res) {
     console.log('CONNECTED TO MONGO');
 
     const sample_rates = await Rate.findOne({from: current,to: destination,date: date});
-    console.log(sample_rates);
+
     sorted_rates = sample_rates?Object.fromEntries(Object.entries(sample_rates["rates"]).sort((a,b)=>a[1]-b[1])):{}
-    console.log('FETCHED');
-    sample_rates?res.json(sorted_rates): res.status(500).send('No Result')
+    result={
+      "rates":sorted_rates,
+      "details": sample_rates["details"]
+    }
+
+    sample_rates?res.json(result): res.status(500).send('No Result')
   } catch (error) {
     console.log(error);
     res.status(500).send(error)

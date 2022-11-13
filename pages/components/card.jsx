@@ -3,8 +3,7 @@ import Image from 'next/image'
 import Payscreen from './pay'
 import { useEffect, useState } from 'react'
 const Card = (props) =>{
-    console.log('hello card');
-    console.log(props);
+
     const [show,setShow] = useState()
     useEffect(()=>{
         setShow()
@@ -13,7 +12,7 @@ const Card = (props) =>{
         <>
         {
             Object.keys(props.rates).map((val,ind)=>{
-                console.log(props.rates)
+
                 return (
                     <div key={ind} className={styles.grid}>
                         <a onClick={(e)=>{
